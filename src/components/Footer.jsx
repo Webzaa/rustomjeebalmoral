@@ -53,7 +53,7 @@ const Footer = () => {
               © {new Date().getFullYear()} Rustomjee Balmoral Golf Links.
             </p>
             <p className="text-[14px] md:text-[16px] text-[var(--black)]/40">
-              <Link to="PrivacyPolicy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link> | <Link to="TermsConditions" target="_blank" rel="noopener noreferrer">Terms & Conditions</Link>
+              <Link to="PrivacyPolicy" rel="noopener noreferrer">Privacy Policy</Link> | <Link to="TermsConditions" rel="noopener noreferrer">Terms & Conditions</Link>
             </p>
           </div>
         </div>
