@@ -4,31 +4,40 @@ const MARKETING_PARAMS = [
   "utm_medium",
   "campaigncode",
   "campaignname",
-  "Lead_Keyword",
-  "utm_adset",
-  "Lead_Placement",
-  "Lead_Device",
-  "gad_source",
+  "utm_campaignname",
+  "utm_campaign",
+  "campaignid",
+  "utm_campaignid",
   "gad_campaignid",
+  "adgroupname",
+  "utm_adgroupname",
+  "utm_adset",
+  "adgroupid",
+  "utm_adgroupid",
+  "adname",
+  "utm_adname",
+  "utm_adcreative",
+  "creative",
+  "Lead_Keyword",
+  "keyword",
+  "utm_term",
+  "Lead_Placement",
+  "placement",
+  "Lead_Device",
+  "device",
+  "gad_source",
   "gbraid",
+  "wbraid",
   "gclid",
 ];
 
 function isSet(value) {
-  return (
-    value !== undefined &&
-    value !== null &&
-    String(value).trim() !== ""
-  );
+  return value !== undefined && value !== null && String(value).trim() !== "";
 }
 
 function setCookie(name, value, days = 30) {
   const date = new Date();
-
-  date.setTime(
-    date.getTime() +
-      days * 24 * 60 * 60 * 1000
-  );
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
 
   document.cookie =
     `${encodeURIComponent(name)}=${encodeURIComponent(value)}` +
@@ -39,21 +48,14 @@ function setCookie(name, value, days = 30) {
 
 function getCookie(name) {
   const cookies = document.cookie.split("; ");
-
-  const prefix =
-    `${encodeURIComponent(name)}=`;
-
-  const cookie = cookies.find((item) =>
-    item.startsWith(prefix)
-  );
+  const prefix = `${encodeURIComponent(name)}=`;
+  const cookie = cookies.find((item) => item.startsWith(prefix));
 
   if (!cookie) {
     return "";
   }
 
-  return decodeURIComponent(
-    cookie.substring(prefix.length)
-  );
+  return decodeURIComponent(cookie.substring(prefix.length));
 }
 
 function deleteCookie(name) {
@@ -63,24 +65,21 @@ function deleteCookie(name) {
     `; path=/`;
 }
 
+/* Call once when the site loads (see App.js) */
 export function captureMarketingParams() {
-  const params = new URLSearchParams(
-    window.location.search
-  );
+  if (typeof window === "undefined") return {};
+
+  const params = new URLSearchParams(window.location.search);
 
   MARKETING_PARAMS.forEach((key) => {
     const value = params.get(key);
 
     if (isSet(value)) {
-      setCookie(
-        key,
-        value,
-        30
-      );
+      setCookie(key, value, 30);
     }
   });
 
-  return getMarketingData();
+  return getNormalizedMarketingData();
 }
 
 export function getMarketingData() {
@@ -95,6 +94,59 @@ export function getMarketingData() {
   });
 
   return data;
+}
+
+export function getNormalizedMarketingData() {
+  const raw = getMarketingData();
+
+  const campaignName =
+    raw.utm_campaignname || raw.campaignname || raw.utm_campaign || "";
+
+  const campaignId =
+    raw.utm_campaignid || raw.gad_campaignid || raw.campaignid || "";
+
+  const adGroupName =
+    raw.utm_adgroupname || raw.utm_adset || raw.adgroupname || "";
+
+  const adGroupId = raw.utm_adgroupid || raw.adgroupid || "";
+
+  const adCreative =
+    raw.utm_adname || raw.utm_adcreative || raw.creative || raw.adname || "";
+
+  const keyword = raw.Lead_Keyword || raw.keyword || raw.utm_term || "";
+
+  const placement = raw.Lead_Placement || raw.placement || "";
+
+  const device = raw.Lead_Device || raw.device || "";
+
+  return {
+    ...raw,
+    utm_source: raw.utm_source || "",
+    utm_sub_source: raw.utm_sub_source || "",
+    utm_medium: raw.utm_medium || "",
+    campaigncode: raw.campaigncode || "",
+    campaignname: campaignName,
+    utm_campaignname: campaignName,
+    campaignid: campaignId,
+    utm_campaignid: campaignId,
+    gad_campaignid: campaignId,
+    utm_adset: adGroupName,
+    utm_adgroupname: adGroupName,
+    adgroupname: adGroupName,
+    utm_adgroupid: adGroupId,
+    adgroupid: adGroupId,
+    utm_adname: adCreative,
+    utm_adcreative: adCreative,
+    Lead_Keyword: keyword,
+    keyword: keyword,
+    Lead_Placement: placement,
+    placement: placement,
+    Lead_Device: device,
+    device: device,
+    gad_source: raw.gad_source || "",
+    gbraid: raw.gbraid || raw.wbraid || "",
+    gclid: raw.gclid || "",
+  };
 }
 
 export function clearMarketingData() {

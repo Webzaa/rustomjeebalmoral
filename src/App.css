@@ -1,3 +1,909 @@
+/* =========================================================
+   APP
+========================================================= */
+
 .App {
+  width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
+}
+
+
+/* =========================================================
+   SITE-WIDE PARALLAX
+========================================================= */
+
+.parallax-layer {
+  --parallax-y: 0px;
+
+  transform: translate3d(
+    0,
+    var(--parallax-y),
+    0
+  );
+
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   SITE FOOTER
+========================================================= */
+
+.site-footer {
+  width: 100%;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+
+/* =========================================================
+   DISCLAIMER SECTION
+========================================================= */
+
+.footer-disclaimer {
+  width: 100%;
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+}
+
+.footer-disclaimer__inner {
+  width: calc(100% - 7rem);
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  padding: 4.5rem 0 3rem;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    520px;
+
+  align-items: center;
+
+  gap: 4rem;
+
+  border-bottom: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   DISCLAIMER CONTENT
+========================================================= */
+
+.footer-disclaimer__content {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.footer-eyebrow {
+  margin: 0 0 1.5rem;
+
+  color: #7894bd;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    1.5rem,
+    2vw,
+    2rem
+  );
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.footer-disclaimer__content p {
+  margin: 0;
+
+  color: #7a7f89;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    15px,
+    1.05vw,
+    18px
+  );
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   QR WRAPPER
+========================================================= */
+
+.footer-qr-wrapper {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================================
+   DESKTOP QR CODES
+========================================================= */
+
+.footer-qr-desktop {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 1.25rem;
+}
+
+.footer-qr-item {
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   QR CARD
+========================================================= */
+
+.footer-qr-card {
+  width: 150px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   QR IMAGE BOX
+========================================================= */
+
+.footer-qr__box {
+  width: 150px;
+  height: 150px;
+
+  padding: 7px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  border: 1px solid
+    rgba(27, 36, 31, 0.12);
+
+  box-shadow:
+    0 4px 16px
+    rgba(27, 36, 31, 0.06);
+
+  box-sizing: border-box;
+}
+
+.footer-qr__box img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   QR WING NAME
+========================================================= */
+
+.footer-qr-wing {
+  margin-top: 1.25rem;
+
+  color: #75816f;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 22px;
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   RERA NUMBER
+========================================================= */
+
+.footer-qr-rera {
+  margin-top: 0.65rem;
+
+  color: #263b30;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 19px;
+
+  font-style: normal;
+  font-weight: 400;
+
+  line-height: 1.15;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MOBILE QR SLIDER
+========================================================= */
+
+.footer-qr-mobile {
+  display: none;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   MOBILE QR VIEWPORT
+========================================================= */
+
+.footer-qr-mobile__viewport {
+  width: 100%;
+
+  overflow: hidden;
+
+  position: relative;
+
+  /*
+   * Allow vertical page scrolling while
+   * still detecting horizontal swipe.
+   */
+  touch-action: pan-y;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   MOBILE QR TRACK
+========================================================= */
+
+.footer-qr-mobile__track {
+  width: 100%;
+
+  display: flex;
+
+  transform: translate3d(
+    0,
+    0,
+    0
+  );
+
+  transition:
+    transform
+    0.55s
+    cubic-bezier(
+      0.16,
+      1,
+      0.3,
+      1
+    );
+
+  will-change: transform;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+
+/* =========================================================
+   MOBILE QR SLIDE
+========================================================= */
+
+.footer-qr-mobile__slide {
+  flex: 0 0 100%;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MOBILE QR CARD
+========================================================= */
+
+.footer-qr-mobile .footer-qr-card {
+  width: 100%;
+  max-width: 340px;
+
+  min-height: 360px;
+
+  padding: 2rem 1rem;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  border: 1px solid
+    rgba(27, 36, 31, 0.12);
+
+  background: rgba(
+    255,
+    255,
+    255,
+    0.12
+  );
+}
+
+
+/* =========================================================
+   MOBILE QR IMAGE
+========================================================= */
+
+.footer-qr-mobile .footer-qr__box {
+  width: 210px;
+  height: 210px;
+
+  flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   MOBILE QR WING
+========================================================= */
+
+.footer-qr-mobile .footer-qr-wing {
+  margin-top: 1.25rem;
+
+  font-size: 24px;
+
+  line-height: 1;
+}
+
+
+/* =========================================================
+   MOBILE RERA
+========================================================= */
+
+.footer-qr-mobile .footer-qr-rera {
+  margin-top: 0.65rem;
+
+  font-size: 22px;
+
+  line-height: 1.15;
+}
+
+
+/* =========================================================
+   MOBILE QR DOTS
+========================================================= */
+
+.footer-qr-dots {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 1.5rem;
+}
+
+
+/* =========================================================
+   QR DOT
+========================================================= */
+
+.footer-qr-dot {
+  width: 7px;
+  height: 7px;
+
+  padding: 0;
+
+  border: 1px solid #7894bd;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   QR DOT HOVER
+========================================================= */
+
+.footer-qr-dot:hover {
+  transform: scale(1.15);
+}
+
+
+/* =========================================================
+   ACTIVE DOT
+========================================================= */
+
+.footer-qr-dot--active {
+  background: #7894bd;
+
+  transform: scale(1.25);
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footer-bottom {
+  width: calc(100% - 7rem);
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+}
+
+.footer-bottom__inner {
+  min-height: 100px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+
+  color: #7894bd;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    14px,
+    1.15vw,
+    18px
+  );
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LEGAL LINKS
+========================================================= */
+
+.footer-legal {
+  display: flex;
+
+  align-items: center;
+
+  gap: 2.5rem;
+}
+
+.footer-legal button {
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #7894bd;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(
+    14px,
+    1.15vw,
+    18px
+  );
+
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.3s ease;
+}
+
+.footer-legal button:hover {
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1440px) {
+  .footer-disclaimer__inner {
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .footer-qr-desktop {
+    gap: 1.5rem;
+  }
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+  .footer-disclaimer__inner {
+    width: calc(100% - 4rem);
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      400px;
+
+    gap: 2.5rem;
+  }
+
+  .footer-qr-desktop {
+    gap: 0.75rem;
+  }
+
+  .footer-qr-card {
+    width: 125px;
+  }
+
+  .footer-qr__box {
+    width: 125px;
+    height: 125px;
+  }
+
+  .footer-qr-wing {
+    font-size: 19px;
+  }
+
+  .footer-qr-rera {
+    font-size: 16px;
+  }
+
+  .footer-bottom {
+    width: calc(100% - 4rem);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .footer-disclaimer__inner {
+    grid-template-columns: 1fr;
+
+    gap: 3rem;
+  }
+
+  .footer-qr-wrapper {
+    justify-content: center;
+  }
+
+  .footer-qr-desktop {
+    justify-content: center;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  .footer-disclaimer__inner {
+    width: calc(100% - 2rem);
+
+    padding:
+      3rem
+      0
+      2.5rem;
+
+    display: block;
+  }
+
+
+  /* -----------------------------------------
+     Disclaimer
+  ----------------------------------------- */
+
+  .footer-disclaimer__content {
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-eyebrow {
+    margin-bottom: 1.25rem;
+
+    font-size: 1.5rem;
+  }
+
+  .footer-disclaimer__content p {
+    font-size: 13px;
+
+    line-height: 1.35;
+  }
+
+
+  /* -----------------------------------------
+     Hide desktop QR
+  ----------------------------------------- */
+
+  .footer-qr-desktop {
+    display: none;
+  }
+
+
+  /* -----------------------------------------
+     Enable mobile QR slider
+  ----------------------------------------- */
+
+  .footer-qr-mobile {
+    display: block;
+
+    width: 100%;
+  }
+
+
+  /* -----------------------------------------
+     QR slide
+  ----------------------------------------- */
+
+  .footer-qr-mobile__slide {
+    min-height: 390px;
+
+    padding: 0 0.5rem;
+  }
+
+
+  /* -----------------------------------------
+     QR card
+  ----------------------------------------- */
+
+  .footer-qr-mobile .footer-qr-card {
+    max-width: 340px;
+
+    min-height: 360px;
+
+    padding:
+      2rem
+      1rem;
+  }
+
+
+  /* -----------------------------------------
+     QR
+  ----------------------------------------- */
+
+  .footer-qr-mobile .footer-qr__box {
+    width: 210px;
+    height: 210px;
+  }
+
+
+  /* -----------------------------------------
+     Wing
+  ----------------------------------------- */
+
+  .footer-qr-mobile .footer-qr-wing {
+    margin-top: 1.25rem;
+
+    font-size: 24px;
+  }
+
+
+  /* -----------------------------------------
+     RERA
+  ----------------------------------------- */
+
+  .footer-qr-mobile .footer-qr-rera {
+    margin-top: 0.65rem;
+
+    font-size: 22px;
+  }
+
+
+  /* -----------------------------------------
+     Dots
+  ----------------------------------------- */
+
+  .footer-qr-dots {
+    margin-top: 1.25rem;
+  }
+
+
+  /* -----------------------------------------
+     Footer bottom
+  ----------------------------------------- */
+
+  .footer-bottom {
+    width: calc(100% - 2rem);
+  }
+
+  .footer-bottom__inner {
+    min-height: auto;
+
+    padding: 1.75rem 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1.25rem;
+  }
+
+  .footer-bottom p {
+    font-size: 13px;
+
+    line-height: 1.4;
+  }
+
+  .footer-legal {
+    gap: 1.5rem;
+  }
+
+  .footer-legal button {
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .footer-disclaimer__inner {
+    width: calc(100% - 1.5rem);
+  }
+
+  .footer-qr-mobile .footer-qr-card {
+    max-width: 300px;
+  }
+
+  .footer-qr-mobile .footer-qr__box {
+    width: 180px;
+    height: 180px;
+  }
+
+  .footer-qr-mobile .footer-qr-wing {
+    font-size: 21px;
+  }
+
+  .footer-qr-mobile .footer-qr-rera {
+    font-size: 19px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL DEVICES
+========================================================= */
+
+@media (max-width: 340px) {
+  .footer-qr-mobile .footer-qr-card {
+    min-height: 330px;
+
+    padding:
+      1.5rem
+      0.75rem;
+  }
+
+  .footer-qr-mobile .footer-qr__box {
+    width: 165px;
+    height: 165px;
+  }
+
+  .footer-qr-mobile .footer-qr-wing {
+    font-size: 19px;
+  }
+
+  .footer-qr-mobile .footer-qr-rera {
+    font-size: 17px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-layer {
+    transform: none !important;
+
+    will-change: auto;
+  }
+
+  .footer-qr-mobile__track {
+    transition: none !important;
+  }
+
+  .footer-qr-dot,
+  .footer-legal button {
+    transition: none !important;
+  }
 }
