@@ -17,7 +17,7 @@ const Residences = () => {
   const { ref, inView } = useReveal();
 
   return (
-    <section id="residences" className="py-20 md:py-32 bg-[var(--cream)]">
+    <section id="residences" className="py-20 md:py-20 bg-[var(--cream)]">
       <div className="mx-auto max-w-[1360px] px-6 md:px-10">
         <div className="max-w-2xl mb-10 md:mb-14">
           <div className="flex items-center gap-3 mb-6">

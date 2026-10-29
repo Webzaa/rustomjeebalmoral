@@ -29,3 +29,9 @@ config/db_config.php
 logs/
 *.log
 
+# Archives and build exports
+*.zip
+/RustomjeeBalmoral
+/rustomjeebalmoral
+
+

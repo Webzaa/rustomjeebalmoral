@@ -14,6 +14,7 @@ import SectionSeparator from "./components/SectionSeparator";
 import Amenities from "./components/Amenities";
 import Walkthrough from "./components/Walkthrough";
 import Residences from "./components/Residences";
+import Faq from "./components/Faq";
 import EnquiryForm from "./components/EnquiryForm";
 import Footer from "./components/Footer";
 
@@ -89,6 +90,9 @@ const Landing = () => {
 
         {/* Residences */}
         <Residences />
+
+        {/* Faq */}
+        <Faq />
 
         {/* Enquiry / Lead Form */}
         <EnquiryForm />
